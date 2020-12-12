@@ -8,7 +8,7 @@ const fib = n => {
   }
   return arr[n - 1];
 };
-fib(7);
+fib(7); // Big(O): -Time Complexity: O(n) / -Space Complexity: O(n)
 
 // With recursion
 let arr = [1, 1];
@@ -21,12 +21,22 @@ const fibR = n => {
   }
 };
 
-fibR(7);
+fibR(7); // Big(O): -Time Complexity: O(n) / -Space Complexity: O(n)
 
-//without using an array
+//With recursion and without using an array
 const fibW = n => {
   if (n <= 2) return 1;
   return fib(n - 1) + fib(n - 2);
 };
 
-fibW(8);
+fibW(8); // Big(O): -Time Complexity: O(2^n) / -Space Complexity: O(n)
+
+//With Recursion and Memoisation
+const fibM = (n, memo = {}) => {
+  if (n in memo) return memo[n];
+  if (n <= 2) return 1;
+  memo[n] = fib(n-1, memo) + fib(n-2, memo);
+  return memo[n];
+}
+
+fibM(5); // Big(O): -Time Complexity: O(n) / -Space Complexity: O(n)
