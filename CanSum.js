@@ -10,11 +10,30 @@ const canSum = (targetSum, numbers) => {
   if (targetSum < 0) return false;
 
   for (let num of numbers) {
-    if (canSum(targetSum - num, numbers) === true ) return true;  
+    if (canSum(targetSum - num, numbers) === true) return true;
   }
 
   return false;
-}
+};
 
 canSum(7, [4, 5]); // Big(O): -TimeComplexity: O(n^m) / -Space Complexity: O(m)
-// Where m = targetSum && n = numbers length 
+// Where m = targetSum && n = numbers length
+
+//Memoized recursion
+const canSumM = (targetSum, numbers, memo = {}) => {
+  if (targetSum in memo) return memo[targetSum];
+  if (targetSum === 0) return true;
+  if (targetSum < 0) return false;
+
+  for (let num of numbers) {
+    if (canSum(targetSum - num, numbers, memo) === true) {
+      memo[targetSum] = true;
+      return true;
+    }
+  }
+
+  memo[targetSum] = false;
+  return false;
+};
+
+console.log(canSumM(7, [4, 2, 5])); // Big(O): -TimeComplexity: O(m*n) / -Space Complexity: O(m)
