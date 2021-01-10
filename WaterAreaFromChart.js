@@ -1,0 +1,41 @@
+// Given an array of positive integers where each integer represents the height of a vertical line on a chart.
+// Find two lines which together with the x-axis forms a container that would hold the greatest amount of water.
+// Return the area f water it would hold.
+
+// Brute Force solution with Bubble sort and recursion and a lot of crazy stuff that takes me a lot of time to think of -_-, but it's fine I solved it ^-^/
+const waterAreaFromChart = (arr) => {
+  const copyArr = [...arr];
+
+  const sortAndGetTheLength = () => {
+    for (let i = 0; i < copyArr.length; i++) {
+      if (copyArr[i] > copyArr[i + 1]) {
+        let temp = copyArr[i];
+        copyArr[i] = copyArr[i + 1];
+        copyArr[i + 1] = temp;
+        sortAndGetTheLength();
+      }
+    }
+    return [copyArr[copyArr.length - 2], copyArr[copyArr.length - 1]];
+  };
+
+  const largestLinesIndexes = {};
+
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === sortAndGetTheLength()[0]) {
+      largestLinesIndexes[arr[i]] = i;
+    } else if (arr[i] === sortAndGetTheLength()[1]) {
+      largestLinesIndexes[arr[i]] = i;
+    }
+  }
+
+  const length = sortAndGetTheLength()[0];
+
+  const width =
+    largestLinesIndexes[sortAndGetTheLength()[1]] -
+    largestLinesIndexes[sortAndGetTheLength()[0]];
+
+  const waterArea = length * width;
+
+  return waterArea;
+};
+console.log(waterAreaFromChart([1, 8, 6, 2, 9, 4])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(1)
