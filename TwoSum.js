@@ -40,3 +40,20 @@ const twoSum3 = (target, numbers) => {
 };
 
 console.log(twoSum3(7, [1, 2, 4, 3, 5])); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
+// Another implementation of the hash map solution
+const twoSum4 = (target, numbers) => {
+  let numbersMap = {};
+  for (let p = 0; p < numbers.length; p++) {
+    const currentMapVal = numbersMap[numbers[p]];
+    if (currentMapVal >= 0) {
+      return [currentMapVal, p];
+    } else {
+      const numberToFind = target - numbers[p];
+      numbersMap[numberToFind] = p;
+    }
+  }
+  return null;
+};
+
+console.log(twoSum4(7, [1, 2, 4, 3, 5])); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
