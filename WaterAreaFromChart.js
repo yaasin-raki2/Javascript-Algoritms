@@ -39,3 +39,33 @@ const waterAreaFromChart = (arr) => {
   return waterArea;
 };
 console.log(waterAreaFromChart([1, 8, 6, 2, 9, 4])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(1)
+
+// Another Brute Force Solution
+const waterAreaFromChart2 = (nums) => {
+  const areas = [];
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (i - j === 0 || j - i === 0) continue;
+      let width;
+      i - j > 0 ? (width = i - j) : (width = j - i);
+      nums[i] > nums[j] ? areas.push(width * nums[j]) : areas.push(width * nums[i]);
+    }
+  }
+
+  const sortAreasAndGetTheBigestOne = () => {
+    for (let i = 0; i < areas.length; i++) {
+      if (areas[i] > areas[i + 1]) {
+        let temp = areas[i];
+        areas[i] = areas[i + 1];
+        areas[i + 1] = temp;
+        sortAreasAndGetTheBigestOne();
+      }
+    }
+    return areas[areas.length - 1];
+  };
+
+  return sortAreasAndGetTheBigestOne();
+};
+
+console.log(waterAreaFromChart2([1, 7, 2, 8, 3, 5])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(n^2)
