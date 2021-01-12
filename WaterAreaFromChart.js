@@ -107,3 +107,22 @@ const waterAreaFromChart4 = (nums) => {
 };
 
 console.log(waterAreaFromChart4([1, 7, 2, 8, 3, 5])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(1)
+
+// Optimale Time and Space complexity solution using the Shiftinh Pointers technic
+const waterAreaFromChart5 = (nums) => {
+  let maxArea = 0;
+
+  let p1 = 0;
+  let p2 = nums.length - 1;
+
+  while (p1 < p2) {
+    let height = Math.min(nums[p1], nums[p2]);
+    let area = height * (p2 - p1);
+    maxArea = Math.max(area, maxArea);
+    height === nums[p1] ? p1++ : p2--;
+  }
+
+  return maxArea;
+};
+
+console.log(waterAreaFromChart5([1, 7, 2, 8, 3, 5])); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(1)
