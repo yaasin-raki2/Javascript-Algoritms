@@ -91,3 +91,19 @@ const waterAreaFromChart3 = (nums) => {
 };
 
 console.log(waterAreaFromChart3([1, 7, 2, 8, 3, 5])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(1)
+
+// The Perfect Brute Force Solution
+const waterAreaFromChart4 = (nums) => {
+  let maxArea = 0;
+
+  for (let p1 = 0; p1 < nums.length; p1++) {
+    for (let p2 = p1 + 1; p2 < nums.length; p2++) {
+      let area = Math.min(nums[p1], nums[p2]) * (p2 - p1);
+      maxArea = Math.max(area, maxArea);
+    }
+  }
+
+  return maxArea;
+};
+
+console.log(waterAreaFromChart4([1, 7, 2, 8, 3, 5])); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(1)
