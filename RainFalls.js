@@ -4,6 +4,7 @@
 
 // Brute Force Solution
 const rainFalls = (arr) => {
+  //Time Complexity: O(n²) / Space Complexity: O(1)
   const indexOfMax = (arr) => {
     return arr.indexOf(Math.max(...arr));
   };
@@ -67,10 +68,11 @@ const rainFalls = (arr) => {
   return rain;
 };
 
-console.log(rainFalls([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
+// console.log(rainFalls([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
 
 // Simplified Brute Force Solution
 const rainFalls2 = (arr) => {
+  //Time Complexity: O(n²) / Space Complexity: O(1)
   let totalWater = 0;
 
   for (let p = 0; p < arr.length; p++) {
@@ -89,10 +91,45 @@ const rainFalls2 = (arr) => {
       rightP++;
     }
 
-    totalWater += Math.min(maxLeft, maxRight) - arr[p];
+    const currentWater = Math.min(maxLeft, maxRight) - arr[p];
+
+    if (currentWater >= 0) totalWater += currentWater;
   }
 
   return totalWater;
 };
 
 console.log(rainFalls2([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
+
+// Optimal AF solution
+const rainFalls3 = (arr) => {
+  // -Time Complexity: O(n) / -Space Complexity: O(1)
+  let p1 = 0;
+  let p2 = arr.length - 1;
+
+  let totalWater = 0;
+  let maxLeft = 0;
+  let maxRight = 0;
+
+  while (p1 < p2) {
+    if (arr[p1] <= arr[p2]) {
+      if (arr[p1] >= maxLeft) {
+        maxLeft = arr[p1];
+      } else {
+        totalWater += maxLeft - arr[p1];
+      }
+      p1++;
+    } else {
+      if (arr[p2] >= maxRight) {
+        maxRight = arr[p2];
+      } else {
+        totalWater += maxRight - arr[p2];
+      }
+      p2--;
+    }
+  }
+
+  return totalWater;
+};
+
+console.log(rainFalls3([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
