@@ -1,3 +1,7 @@
+//Given an array of integers representing an elevation map
+//where the width of each bar is 1,
+//return how much rainwater can be trapped
+
 // Brute Force Solution
 const rainFalls = (arr) => {
   const indexOfMax = (arr) => {
@@ -43,11 +47,9 @@ const rainFalls = (arr) => {
     indexOfMax(LarrWithoutMax) + 1,
     LarrOfMaxAndHeight.length
   );
-  console.log(LsliceToIterateOn, LarrWithoutMax, leftArr);
 
   for (let i = leftArr.length - 1; i > 0; i--) {
     for (let j = LsliceToIterateOn.length - 1; j > 0; j--) {
-      console.log(leftSum);
       leftSum += Lheight - LsliceToIterateOn[j];
     }
 
@@ -66,3 +68,31 @@ const rainFalls = (arr) => {
 };
 
 console.log(rainFalls([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
+
+// Simplified Brute Force Solution
+const rainFalls2 = (arr) => {
+  let totalWater = 0;
+
+  for (let p = 0; p < arr.length; p++) {
+    let leftP = p,
+      rightP = p,
+      maxLeft = 0,
+      maxRight = 0;
+
+    while (leftP >= 0) {
+      maxLeft = Math.max(maxLeft, arr[leftP]);
+      leftP--;
+    }
+
+    while (rightP < arr.length) {
+      maxRight = Math.max(maxRight, arr[rightP]);
+      rightP++;
+    }
+
+    totalWater += Math.min(maxLeft, maxRight) - arr[p];
+  }
+
+  return totalWater;
+};
+
+console.log(rainFalls2([0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]));
