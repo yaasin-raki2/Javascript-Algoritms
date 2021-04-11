@@ -48,3 +48,32 @@ const Substring2 = (S) => {
 };
 
 console.log(Substring2("abcbdcay")); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(a+b)
+
+const Substring3 = (S) => {
+  if (S.length <= 1) {
+    return S.length;
+  }
+
+  let longest = 0;
+
+  for (let L = 0; L < S.length; L++) {
+    let seenChars = {};
+    let currentLength = 0;
+
+    for (let R = L; R < S.length; R++) {
+      const currentChar = S[R];
+
+      if (!seenChars[currentChar]) {
+        currentLength++;
+        seenChars[currentChar] = true;
+        longest = Math.max(longest, currentLength);
+      } else {
+        break;
+      }
+    }
+  }
+
+  return longest;
+};
+
+console.log(Substring3("abcbdcay")); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(n)
