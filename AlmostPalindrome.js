@@ -22,12 +22,12 @@ const AlmostPalindrome = (S) => {
   if (!isPalindrome(S)) {
     p1++;
     if (S[p1] === S[p2]) {
-      return true;
+      return isPalindrome(S);
     }
     p1--;
     p2--;
     if (S[p1] === S[p2]) {
-      return true;
+      return isPalindrome(S);
     }
     return false;
   }
