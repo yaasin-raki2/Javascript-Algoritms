@@ -66,7 +66,7 @@ const Substring3 = (S) => {
       if (!seenChars[currentChar]) {
         currentLength++;
         seenChars[currentChar] = true;
-        longest = Math.max(longest, curre);
+        longest = Math.max(longest, currentLength);
       }
     }
   }
@@ -74,4 +74,30 @@ const Substring3 = (S) => {
   return longest;
 };
 
-console.log(Substring3("abcbdcay"));
+console.log(Substring3("abcbdcay")); // Big(O): - Time Complexity: O(n^2) / - Space Complexity: O(n)
+
+const Substring4 = (S) => {
+  if (S.length <= 1) {
+    return S.length;
+  }
+
+  let seen = {};
+
+  let left = 0;
+  let right = 0;
+
+  let longest = 0;
+
+  while (right < S.length) {
+    if (seen[S[right]] >= left) {
+      left = seen[S[right]] + 1;
+    }
+    seen[S[right]] = right;
+    longest = Math.max(longest, right - left + 1);
+    right++;
+  }
+
+  return longest;
+};
+
+console.log(Substring4("abcbdcay")); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
