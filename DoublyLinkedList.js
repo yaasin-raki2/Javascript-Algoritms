@@ -1,19 +1,20 @@
-export class Node {
-  constructor(value) {
+class Node {
+  constructor(value, child) {
     this.value = value;
     this.next = null;
     this.prev = null;
+    this.child = child;
   }
 }
 
-export class DoublyLinkedList {
+module.exports = class DoublyLinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
   }
 
-  push(value) {
-    const newNode = new Node(value);
+  push(value, child) {
+    const newNode = new Node(value, child);
 
     if (!this.head) {
       this.head = newNode;
@@ -26,4 +27,4 @@ export class DoublyLinkedList {
 
     return this;
   }
-}
+};
