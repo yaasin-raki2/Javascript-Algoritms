@@ -14,6 +14,7 @@ const DoublyLinkedListChilds = (list) => {
   while (currentNode) {
     if (currentNode.child) {
       let next = currentNode.next;
+
       parrentNode = currentNode;
       childNode = parrentNode.child;
       parrentNode.next = childNode.head;
@@ -43,4 +44,39 @@ doublyLinkedList.push(1, null);
 doublyLinkedList.push(2, doublyLinkedList2);
 doublyLinkedList.push(3, null);
 
-console.log(DoublyLinkedListChilds(doublyLinkedList));
+console.log(DoublyLinkedListChilds(doublyLinkedList)); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(1)
+
+const DoublyLinkedListChilds2 = ({ head }) => {
+  if (!head) {
+    return null;
+  }
+
+  let currentNode = head;
+
+  while (currentNode !== null) {
+    if (currentNode.child === null) {
+      currentNode = currentNode.next;
+    } else {
+      let tail = currentNode.child;
+
+      while (tail.next !== null) {
+        tail = tail.next;
+      }
+
+      tail.next = currentNode.next;
+
+      if (tail.next !== null) {
+        tail.next.prev = tail;
+      }
+
+      currentNode.next = currentNode.child;
+      currentNode.next.prev = currentNode;
+
+      currentNode.child = null;
+    }
+  }
+
+  return head;
+};
+
+console.log(DoublyLinkedListChilds2(doublyLinkedList)); // Big(O): - Time Complexity: O(2n) -> 0(n) / - Space Complexity: O(1)
