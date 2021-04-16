@@ -45,4 +45,54 @@ const ClosedParentheses = (S) => {
   return result;
 };
 
-console.log(ClosedParentheses("{([])}"));
+console.log(ClosedParentheses("{([])}")); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
+const parens = {
+  "(": ")",
+  "{": "}",
+  "[": "]",
+};
+
+// Sipmpler Solution
+const ClosedParentheses2 = (S) => {
+  if (S.length === 0) return true;
+
+  const stack = [];
+
+  for (let i = 0; i < S.length; i++) {
+    if (parens[S[i]]) {
+      stack.push(S[i]);
+    } else {
+      if (parens[stack[stack.length - 1]] === S[i]) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+
+  return stack.length === 0;
+};
+
+console.log(ClosedParentheses2("{([])}")); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
+// Another one '-'
+const ClosedParentheses3 = (S) => {
+  if (S.length === 0) return true;
+
+  const stack = [];
+
+  for (let i = 0; i < S.length; i++) {
+    if (parens[S[i]]) {
+      stack.push(S[i]);
+    } else {
+      const leftBracket = stack.pop();
+      const correctBracket = parens[leftBracket];
+      if (S[i] !== correctBracket) return false;
+    }
+  }
+
+  return stack.length === 0;
+};
+
+console.log(ClosedParentheses3("{([])}")); // Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
