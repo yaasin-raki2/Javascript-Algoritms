@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-export class BST {
+module.exports = class BST {
   constructor() {
     this.head = null;
   }
@@ -122,18 +122,18 @@ export class BST {
 
     return current;
   }
-}
+};
 
-const tree = new BST();
+// const tree = new BST();
 
-tree.insert(100);
-tree.insert(150);
-tree.insert(200);
-tree.insert(120);
-tree.insert(20);
-tree.insert(175);
+// tree.insert(100);
+// tree.insert(150);
+// tree.insert(200);
+// tree.insert(120);
+// tree.insert(20);
+// tree.insert(175);
 
-console.log(tree.head);
-console.log(tree.find(200));
-console.log(tree.BFS());
-console.log(tree.delete(150));
+// console.log(tree.head);
+// console.log(tree.find(200));
+// console.log(tree.BFS());
+// console.log(tree.delete(150));
