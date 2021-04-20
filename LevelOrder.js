@@ -3,6 +3,7 @@
 
 const BST = require("./BinarySearchTree");
 
+// Using Breath First Search
 const LevelOrder = (node) => {
   const data = [];
   const queue = [];
@@ -41,6 +42,47 @@ tree.insert(150);
 tree.insert(200);
 tree.insert(120);
 tree.insert(20);
+tree.insert(30);
 tree.insert(175);
 
+// Big(O): - Time Complexity: O(n) / - Space Complexity: O(n + n/2 + 1) => O(2n) => O(n)
+
 console.log(LevelOrder(tree.head));
+
+// Anoter Implementation using Breath First Search
+const LevelOrder2 = (root) => {
+  if (!root) {
+    return [];
+  }
+
+  const result = [];
+  const queue = [root];
+
+  while (queue.length) {
+    let length = queue.length;
+    let count = 0;
+    const currentLevelValue = [];
+
+    while (count < length) {
+      const currentNode = queue.shift();
+
+      currentLevelValue.push(currentNode.value);
+
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+      count++;
+    }
+
+    result.push(currentLevelValue);
+  }
+
+  return result;
+};
+
+// Big(O): - Time Complexity: O(n) / - Space Complexity: O(n + n/2 + 1) => O(2n) => O(n)
+
+console.log(LevelOrder2(tree.head));
