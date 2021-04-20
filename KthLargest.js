@@ -91,7 +91,7 @@ const KthLargest3 = (arr, k, left = 0, right = arr.length - 1) => {
     } else if (arr.length - k > partitionIdx) {
       return KthLargest3(arr, k, partitionIdx + 1, right);
     } else {
-      return KthLargest(arr, k, left, partitionIdx - 1);
+      return KthLargest3(arr, k, left, partitionIdx - 1);
     }
   }
 
