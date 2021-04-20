@@ -40,3 +40,29 @@ tree.insert(30);
 tree.insert(150);
 
 console.log(RightSideView(tree.head));
+
+// Another BFS Solution
+const RightSideView2 = (node) => {
+  const result = [];
+  const queue = [node];
+
+  while (queue.length) {
+    let length = queue.length;
+    let count = 0;
+
+    while (count < length) {
+      let current = queue.shift();
+
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+
+      count++;
+
+      if (count === length) result.push(current.value);
+    }
+  }
+
+  return result;
+};
+
+console.log(RightSideView2(tree.head));
