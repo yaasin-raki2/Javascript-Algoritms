@@ -39,6 +39,8 @@ tree.insert(40);
 tree.insert(30);
 tree.insert(150);
 
+// Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
 console.log(RightSideView(tree.head));
 
 // Another BFS Solution
@@ -65,4 +67,28 @@ const RightSideView2 = (node) => {
   return result;
 };
 
+// Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
 console.log(RightSideView2(tree.head));
+
+// Using Depth First Search
+const RightSideView3 = (root) => {
+  const result = [];
+
+  const Dfs = (node, currentLevel, result) => {
+    if (!node) return;
+
+    if (currentLevel >= result.length) result.push(node.value);
+
+    if (node.right) Dfs(node.right, currentLevel + 1, result);
+    if (node.left) Dfs(node.left, currentLevel + 1, result);
+  };
+
+  Dfs(root, 0, result);
+
+  return result;
+};
+
+// Big(O): - Time Complexity: O(n) / - Space Complexity: O(n)
+
+console.log(RightSideView3(tree.head));
